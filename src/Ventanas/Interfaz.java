@@ -10,18 +10,25 @@ import javax.swing.Timer;
  * @author mario
  */
 public class Interfaz extends javax.swing.JFrame {
+    String txt1 = "";
+    String txt2 = "";
     int miliSeg = 0;
     int segundos = 0;
     int minutos = 0;
     int score1 = 0;
     int score2 = 0;
+    int contadorTiempo = 0;
     boolean estado = true;
     /**
      * Creates new form Interfaz
      */
-    public Interfaz() {
+    public Interfaz(String str1, String str2) {
         initComponents();
         this.setLocationRelativeTo(null);
+        txt1 = str1;
+        txt2 = str2;
+        Team1.setText(txt1);
+        Team2.setText(txt2);
     }
 
     /**
@@ -35,8 +42,8 @@ public class Interfaz extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jLabelVS = new javax.swing.JLabel();
-        jLabelTeam1 = new javax.swing.JLabel();
-        jLabelTeam2 = new javax.swing.JLabel();
+        Team1 = new javax.swing.JLabel();
+        Team2 = new javax.swing.JLabel();
         jLabelScore2 = new javax.swing.JLabel();
         jLabelScore1 = new javax.swing.JLabel();
         jLabelTiempo = new javax.swing.JLabel();
@@ -49,16 +56,18 @@ public class Interfaz extends javax.swing.JFrame {
         jButtonAdd2 = new javax.swing.JButton();
         jButtonStop = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jLabelFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setBackground(new java.awt.Color(0, 0, 204));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Salir");
+        jButton1.setText("SALIR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -66,39 +75,45 @@ public class Interfaz extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 0, -1, -1));
 
-        jLabelVS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/vs.png"))); // NOI18N
-        getContentPane().add(jLabelVS, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 90, -1, -1));
+        jLabelVS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/vs2.png"))); // NOI18N
+        getContentPane().add(jLabelVS, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 70, -1, -1));
 
-        jLabelTeam1.setFont(new java.awt.Font("Agency FB", 1, 100)); // NOI18N
-        jLabelTeam1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelTeam1.setText("TEAM1");
-        getContentPane().add(jLabelTeam1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, -1, -1));
+        Team1.setFont(new java.awt.Font("Agency FB", 1, 100)); // NOI18N
+        Team1.setForeground(new java.awt.Color(255, 255, 255));
+        Team1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Team1.setText("TEAM1");
+        getContentPane().add(Team1, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 80, 610, -1));
 
-        jLabelTeam2.setFont(new java.awt.Font("Agency FB", 1, 100)); // NOI18N
-        jLabelTeam2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelTeam2.setText("TEAM2");
-        getContentPane().add(jLabelTeam2, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 80, 270, 110));
+        Team2.setFont(new java.awt.Font("Agency FB", 1, 100)); // NOI18N
+        Team2.setForeground(new java.awt.Color(255, 255, 255));
+        Team2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Team2.setText("TEAM2");
+        getContentPane().add(Team2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 80, 590, 110));
 
-        jLabelScore2.setFont(new java.awt.Font("Agency FB", 3, 400)); // NOI18N
-        jLabelScore2.setText("00");
-        getContentPane().add(jLabelScore2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 230, 460, 330));
+        jLabelScore2.setFont(new java.awt.Font("Agency FB", 1, 400)); // NOI18N
+        jLabelScore2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelScore2.setText("0");
+        getContentPane().add(jLabelScore2, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 290, 460, 330));
 
-        jLabelScore1.setFont(new java.awt.Font("Agency FB", 3, 400)); // NOI18N
-        jLabelScore1.setText("00");
-        getContentPane().add(jLabelScore1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 440, 330));
+        jLabelScore1.setFont(new java.awt.Font("Agency FB", 1, 400)); // NOI18N
+        jLabelScore1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelScore1.setText("0");
+        getContentPane().add(jLabelScore1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, 440, 330));
 
-        jLabelTiempo.setFont(new java.awt.Font("Arial", 1, 100)); // NOI18N
+        jLabelTiempo.setFont(new java.awt.Font("Arial", 1, 130)); // NOI18N
         jLabelTiempo.setForeground(new java.awt.Color(255, 0, 0));
-        jLabelTiempo.setText("T1");
-        getContentPane().add(jLabelTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 220, -1, -1));
+        jLabelTiempo.setText("T   1");
+        getContentPane().add(jLabelTiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 380, -1, -1));
 
-        jLabelCrono.setFont(new java.awt.Font("Agency FB", 1, 80)); // NOI18N
+        jLabelCrono.setFont(new java.awt.Font("Agency FB", 1, 110)); // NOI18N
+        jLabelCrono.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCrono.setText("00:00");
-        getContentPane().add(jLabelCrono, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 500, -1, -1));
+        getContentPane().add(jLabelCrono, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 620, -1, -1));
 
-        jLabelT.setFont(new java.awt.Font("Arial", 1, 48)); // NOI18N
-        jLabelT.setText("TIEMPO");
-        getContentPane().add(jLabelT, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 450, -1, -1));
+        jLabelT.setFont(new java.awt.Font("Agency FB", 1, 110)); // NOI18N
+        jLabelT.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelT.setText("TIEMPO:");
+        getContentPane().add(jLabelT, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 620, -1, -1));
 
         jButttonSub1.setBackground(new java.awt.Color(0, 102, 0));
         jButttonSub1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
@@ -108,7 +123,7 @@ public class Interfaz extends javax.swing.JFrame {
                 jButttonSub1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButttonSub1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 600, -1, -1));
+        getContentPane().add(jButttonSub1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, -1, -1));
 
         jButtonAdd1.setBackground(new java.awt.Color(0, 102, 0));
         jButtonAdd1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
@@ -118,7 +133,7 @@ public class Interfaz extends javax.swing.JFrame {
                 jButtonAdd1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonAdd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 600, -1, -1));
+        getContentPane().add(jButtonAdd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, -1, -1));
 
         jButtonStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/play.png"))); // NOI18N
         jButtonStart.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +141,7 @@ public class Interfaz extends javax.swing.JFrame {
                 jButtonStartActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 600, -1, -1));
+        getContentPane().add(jButtonStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 600, -1, -1));
 
         jButtonSub2.setBackground(new java.awt.Color(0, 102, 0));
         jButtonSub2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
@@ -136,7 +151,7 @@ public class Interfaz extends javax.swing.JFrame {
                 jButtonSub2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonSub2, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 600, -1, -1));
+        getContentPane().add(jButtonSub2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 450, -1, -1));
 
         jButtonAdd2.setBackground(new java.awt.Color(0, 102, 0));
         jButtonAdd2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
@@ -146,7 +161,7 @@ public class Interfaz extends javax.swing.JFrame {
                 jButtonAdd2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonAdd2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 600, -1, -1));
+        getContentPane().add(jButtonAdd2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 450, -1, -1));
 
         jButtonStop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/stp.png"))); // NOI18N
         jButtonStop.addActionListener(new java.awt.event.ActionListener() {
@@ -154,7 +169,7 @@ public class Interfaz extends javax.swing.JFrame {
                 jButtonStopActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonStop, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 600, -1, -1));
+        getContentPane().add(jButtonStop, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 700, -1, -1));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pause.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +177,36 @@ public class Interfaz extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 600, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 650, -1, -1));
+
+        jButton3.setBackground(new java.awt.Color(0, 0, 204));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("CAMBIAR");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jButton4.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jButton4.setText("<");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 510, -1, -1));
+
+        jButton5.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jButton5.setText(">");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 510, -1, -1));
 
         jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.png"))); // NOI18N
         getContentPane().add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -178,12 +222,12 @@ public class Interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
         score1 --;
         if(score1 <= 0){
-            jLabelScore1.setText("00");
+            jLabelScore1.setText("0");
             score1 = 0;
         }
         else{
             if(score1<10){
-                jLabelScore1.setText("0"+score1);
+                jLabelScore1.setText(""+score1);
             }
             else{
                 jLabelScore1.setText(""+score1);
@@ -195,7 +239,7 @@ public class Interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
         score1 ++;
         if(score1<10){
-            jLabelScore1.setText("0"+score1);
+            jLabelScore1.setText(""+score1);
         }
         else{
             jLabelScore1.setText(""+score1);
@@ -206,12 +250,12 @@ public class Interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
         score2 --;
         if(score2 <= 0){
-            jLabelScore2.setText("00");
+            jLabelScore2.setText("0");
             score2 = 0;
         }
         else{
             if(score2<10){
-                jLabelScore2.setText("0"+score2);
+                jLabelScore2.setText(""+score2);
             }
             else{
                 jLabelScore2.setText(""+score2);
@@ -272,12 +316,35 @@ public class Interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
         score2 ++;
         if(score2<10){
-            jLabelScore2.setText("0"+score2);
+            jLabelScore2.setText(""+score2);
         }
         else{
             jLabelScore2.setText(""+score2);
         }
     }//GEN-LAST:event_jButtonAdd2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        Nombres name = new Nombres();
+        name.show();
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        if (contadorTiempo < 1){
+            contadorTiempo = contadorTiempo + 1;
+            jLabelTiempo.setText("T   2");
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        if (contadorTiempo > 0){
+            contadorTiempo = contadorTiempo - 1;
+            jLabelTiempo.setText("T   1");
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,14 +376,19 @@ public class Interfaz extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Interfaz().setVisible(true);
+                new Interfaz("TEAM1","TEAM2").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Team1;
+    private javax.swing.JLabel Team2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButtonAdd1;
     private javax.swing.JButton jButtonAdd2;
     private javax.swing.JButton jButtonStart;
@@ -328,8 +400,6 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelScore1;
     private javax.swing.JLabel jLabelScore2;
     private javax.swing.JLabel jLabelT;
-    private javax.swing.JLabel jLabelTeam1;
-    private javax.swing.JLabel jLabelTeam2;
     private javax.swing.JLabel jLabelTiempo;
     private javax.swing.JLabel jLabelVS;
     // End of variables declaration//GEN-END:variables
